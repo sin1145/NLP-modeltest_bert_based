@@ -1,6 +1,6 @@
 # NLP-modeltest_bert_based
 
-NLP作业 在三个下游任务上实现了测试与微调模型
+NLP作业 在三个下游任务上实现了测试与微调三种模型 没有用更高级的是因为自己想学学
 使用时路径为Bert_forxxx文件夹下运行
 # 1.模型下载
 使用的模型在Bert_forxxx文件夹下有标出，已经添加vocab与config文件夹，pytorch.bin可对应模型名称从hugging face官网搜索下载
