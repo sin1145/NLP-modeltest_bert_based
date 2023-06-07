@@ -14,7 +14,7 @@ from Utils import seed_everything
 import seaborn as sns
 from matplotlib import pyplot as plt
 
-# model_type = 'bert'
+
 seed_everything()
 
 # Load BERT default config object and make necessary changes as per requirement
@@ -89,41 +89,41 @@ model.zero_grad()
 epoch_iterator = trange(int(NUM_EPOCHS), desc="Epoch")
 training_acc_list, validation_acc_list = [], []
 
-model.load_state_dict(torch.load('./modelset/model2.pth')) 
+# model.load_state_dict(torch.load('./modelset/model2.pth')) 
 for epoch in epoch_iterator:
     epoch_loss = 0.0
     train_correct_total = 0
 
-    # # Training Loop
-    # train_iterator = tqdm(train_loader, desc="Train Iteration")
-    # for step, batch in enumerate(train_iterator):
-    #     model.train(True)
-    #     # Here each element of batch list refers to one of [input_ids, segment_ids, attention_mask, labels]
-    #     inputs = {
-    #         'input_ids': batch[0].to(DEVICE),
-    #         'token_type_ids': batch[1].to(DEVICE),
-    #         'attention_mask': batch[2].to(DEVICE)
-    #     }
+    # Training Loop
+    train_iterator = tqdm(train_loader, desc="Train Iteration")
+    for step, batch in enumerate(train_iterator):
+        model.train(True)
+        # Here each element of batch list refers to one of [input_ids, segment_ids, attention_mask, labels]
+        inputs = {
+            'input_ids': batch[0].to(DEVICE),
+            'token_type_ids': batch[1].to(DEVICE),
+            'attention_mask': batch[2].to(DEVICE)
+        }
 
-    #     labels = batch[3].to(DEVICE)
-    #     logits = model(**inputs)
+        labels = batch[3].to(DEVICE)
+        logits = model(**inputs)
 
-    #     loss = criterion(logits, labels) / GRADIENT_ACCUMULATION_STEPS
-    #     loss.backward()
-    #     epoch_loss += loss.item()
+        loss = criterion(logits, labels) / GRADIENT_ACCUMULATION_STEPS
+        loss.backward()
+        epoch_loss += loss.item()
 
-    #     if (step + 1) % GRADIENT_ACCUMULATION_STEPS == 0:
-    #         scheduler.step()
-    #         optimizer.step()
-    #         model.zero_grad()
+        if (step + 1) % GRADIENT_ACCUMULATION_STEPS == 0:
+            scheduler.step()
+            optimizer.step()
+            model.zero_grad()
 
-    #     _, predicted = torch.max(logits.data, 1)
-    #     # print(predicted)
-    #     correct_reviews_in_batch = (predicted == labels).sum().item()
-    #     train_correct_total += correct_reviews_in_batch
+        _, predicted = torch.max(logits.data, 1)
+        # print(predicted)
+        correct_reviews_in_batch = (predicted == labels).sum().item()
+        train_correct_total += correct_reviews_in_batch
 
 
-    # print('Epoch {} - Loss {:.2f}'.format(epoch + 1, epoch_loss / len(train_indices)))
+    print('Epoch {} - Loss {:.2f}'.format(epoch + 1, epoch_loss / len(train_indices)))
     pred_list = []
     label_list = []
     # Validation Loop
