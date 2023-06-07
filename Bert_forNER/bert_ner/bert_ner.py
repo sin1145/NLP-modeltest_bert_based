@@ -9,6 +9,8 @@ from torch.utils.data import TensorDataset, DataLoader, RandomSampler
 import torch.nn.functional as F
 from transformers import BertTokenizer, BertPreTrainedModel, BertConfig, RobertaPreTrainedModel,RobertaConfig,AlbertPreTrainedModel,AlbertConfig
 from seqeval.metrics import classification_report
+
+# 该文件只包含NER任务，其他任务在其他文件夹下，readme.md中有说明
 logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
                     datefmt = '%m/%d/%Y %H:%M:%S',
                     level = logging.INFO)
