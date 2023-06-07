@@ -25,8 +25,8 @@ if __name__ == "__main__":
     # ROBERTA
     model_setting = {
         "model_name":"roberta", 
-        "config_file_path":"trained_model/config.json",      
-        "model_file_path":"trained_model/pytorch_model.bin", 
+        "config_file_path":"roberta_chinese_pair_tiny/config.json",      
+        "model_file_path":"roberta_chinese_pair_tiny/pytorch_model.bin", 
         "vocab_file_path":"roberta_chinese_pair_tiny/vocab.txt",
         "num_labels":149 # 分幾類
     }    
